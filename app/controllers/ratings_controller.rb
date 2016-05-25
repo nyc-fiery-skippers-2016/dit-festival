@@ -7,5 +7,6 @@ class RatingsController < ApplicationController
 			redirect_to film_path(@rating.film_id)
 		else
 			redirect_to film_path(@rating.film_id)
+		end
 	end
 end
