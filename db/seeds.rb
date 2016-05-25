@@ -142,7 +142,7 @@ reviews = 30.times.map do
 end
 
 comments = 50.times.map do
-  Comment.create! (:body => "",
+  Comment.create!( :body => Faker::Lorem.sentence,
                    :user => User.all.sample,
                    :review => Review.all.sample )
 end
