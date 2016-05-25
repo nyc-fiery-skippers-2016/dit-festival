@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
-	belongs_to :film
+	has_many :films
 
 	validates :name, presence: true
 
