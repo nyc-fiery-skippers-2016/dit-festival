@@ -1,0 +1,5 @@
+<%= @user.username %>
+
+<%= if @user.judge == true %>
+	<%= link_to 'Add a new Film', new_film_path %>
+<% end %>

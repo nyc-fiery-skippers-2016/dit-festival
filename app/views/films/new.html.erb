@@ -1,0 +1,22 @@
+<%= form_for @film, :html =>{:class => "form"} do |f| %>
+
+<% if @film.errors.any? %>
+<h2><%= pluralize(@film.errors.count,"error") %> prevented this post from saving</h2>
+
+    <ul>
+      <% @film.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+<% end %>
+
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.submit "New Film", :class =>"form-button" %>
+  </p>
+ 
+<% end %>
