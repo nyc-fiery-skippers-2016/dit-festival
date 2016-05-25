@@ -1,0 +1,11 @@
+
+<h1>Films in this Category</h1>
+<ul>
+<% @category_films.each do |film| %>
+  <li><%= link_to film.title, film_path(film) %></li>
+<% end %>
+
+
+
+<%= link_to 'Back', categories_path %>
+</ul>
