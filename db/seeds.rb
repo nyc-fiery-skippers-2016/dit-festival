@@ -140,3 +140,9 @@ reviews = 30.times.map do
                   :film => Film.all.sample,
                   :user => User.last(20).sample )
 end
+
+comments = 50.times.map do
+  Comment.create! (:body => "",
+                   :user => User.all.sample,
+                   :review => Review.all.sample )
+end
