@@ -1,0 +1,22 @@
+<%= form_for @comment, :html =>{:class => "form"} do |f| %>
+
+<% if @comment.errors.any? %>
+<h2><%= pluralize(@comment.errors.count,"error") %> prevented this comment from saving</h2>
+
+    <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+<% end %>
+
+  <p>
+    <%= f.label :body %><br>
+    <%= f.text_field :body %>
+  </p>
+
+  <p>
+    <%= f.submit "New Comment", :class =>"form-button" %>
+  </p>
+
+<% end %>
