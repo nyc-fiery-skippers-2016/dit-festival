@@ -1,5 +1,13 @@
-<%= @user.username %>
+<div class="container">
+<h1 class="uppercase"><span class="accent-word"><%= @user.username %>'s</span> Profile</h1>
 
-<%= if @user.judge == true %>
+<% if @user.judge == true %>
 	<%= link_to 'Add a new Film', new_film_path %>
 <% end %>
+
+<h3>Your Reviews</h3>
+<% @user.reviews.each do |review| %>
+  <section><%= review.film.title %><br><%= review.body %></section><br><br>
+<% end %>
+
+</div>
