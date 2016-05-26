@@ -10,6 +10,9 @@ class ReviewsController < ApplicationController
 	def new
 		@review = Review.new
     @film = Film.find_by(id: params[:film_id])
+    if request.xhr?
+      render "/reviews/_form", layout: false
+    end
 	end
 
 	def edit
