@@ -1,14 +1,28 @@
+<div class="container">
+
+  <h1 class="uppercase">Register <span class="accent-word">here</span></h1>
+
+<div class="form-box">
+
 <%= form_for @user do |f| %>
 
-  <p>
-    <%= f.label :username %>
+  <h4><%= f.label :username %> </h4>
     <%= f.text_field :username %>
-  </p>
-  <p>
-    <%= f.label :password %>
+
+  <h4><%= f.label :password %></h4>
     <%= f.password_field :password %>
-  </p>
-  <p>
-    <%= f.submit "Register" %>
-  </p>
+
+<% if @user.errors.any? %>
+
+      <% @user.errors.full_messages.each do |msg| %>
+        <h5 class="red"><%= msg %></h5>
+      <% end %>
+    </ul>
 <% end %>
+
+  </div>
+  <%= f.submit "Register", :class => "button" %>
+<% end %>
+
+
+</div>
