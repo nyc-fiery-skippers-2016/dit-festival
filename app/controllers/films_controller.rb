@@ -5,6 +5,7 @@ class FilmsController < ApplicationController
 
   def show
     @film = Film.find_by(id: params[:id])
+    @rating = Rating.new
   end
   
   def new
