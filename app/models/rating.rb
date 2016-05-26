@@ -3,4 +3,8 @@ class Rating < ActiveRecord::Base
 	belongs_to :film
 
 	validates :score, presence: true
+
+	def rate
+		
+	end
 end
