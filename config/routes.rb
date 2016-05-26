@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-    resources :pages, only: [:index]
     resources :films, only:[:index, :new, :show, :create]
     resources :ratings, only:[:create]
     resources :categories, only: [:index, :show]
@@ -8,6 +7,8 @@ Rails.application.routes.draw do
     resources :reviews, except: [:index] do
     resources :comments, except: [:index]
     end
+
+    get    'winners'  => 'pages#show'
 
     get    'login'   => 'sessions#new'
     post   'login'   => 'sessions#create'
