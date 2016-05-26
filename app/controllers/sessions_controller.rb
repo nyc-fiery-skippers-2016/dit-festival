@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-	def new  
+	def new
   end
 
   def create
@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_path
     else
-      flash.now[:error] = "Invalid username/password combination"
+      @errors = ["Invalid username/password combination"]
       render 'new'
     end
   end

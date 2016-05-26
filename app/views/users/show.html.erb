@@ -1,13 +1,59 @@
 <div class="container">
-<h1 class="uppercase"><span class="accent-word"><%= @user.username %>'s</span> Profile</h1>
+<h1 class="uppercase"><%= @user.username %>'s <span class="accent-word">Profile</span> </h1>
 
 <% if @user.judge == true %>
-	<%= link_to 'Add a new Film', new_film_path %>
+	<%= link_to 'Nominate a New Film', new_film_path, :class => 'black-button' %>
+<% end %>
+<br><br>
+<h3>Your Reviews</h3>
+<% if @user.reviews.length < 1 %>
+  <h4>You haven't reviewed any films yet</h4>
+<% else %>
+<table>
+  <thead>
+    <td>Film Title</td>
+    <td>Review</td>
+    <td>Rating</td>
+  </thead>
+<% @user.reviews.each do |review| %>
+  <tr>
+    <td><%= link_to review.film.title, film_path(review.film) %></td>
+    <td><%= link_to review.body, film_path(review.film) %></td>
+    <td><% if review.film.ratings != nil %>
+      <% review.film.ratings.each do |rating| %>
+      <%= link_to rating.score.to_f / 2, film_path(review.film) %></td>
+      <% end %>
+      <% else %>
+      <td> </td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
 <% end %>
 
-<h3>Your Reviews</h3>
-<% @user.reviews.each do |review| %>
-  <section><%= review.film.title %><br><%= review.body %></section><br><br>
+<br><br>
+
+
+<h3>Your Ratings</h3>
+<% if @user.ratings.length < 1 %>
+  <h4>You haven't rated any films yet</h4>
+<% else %>
+<table>
+  <thead>
+    <td>Film Title</td>
+    <td>Rating</td>
+  </thead>
+<% @user.ratings.each do |rating| %>
+  <tr>
+    <td><%= link_to rating.film.title, film_path(rating.film) %></td>
+    <td><%= link_to (rating.score.to_f / 2), film_path(rating.film) %></td>
+<% end %>
+  </tr>
+</table>
+<% end %>
+<br><br>
+<% if @user == current_user %>
+<%= link_to "Edit Your Profile", edit_user_path(@user), :class => "black-button" %>
 <% end %>
 
 </div>
