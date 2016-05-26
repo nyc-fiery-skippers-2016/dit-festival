@@ -1,2 +1,11 @@
 <h1><%= @film.title %></h1>
 
+<% @film.reviews.each do |review| %>
+<h3>Review by: <%= review.user.username%><br><%= review.body %></h3>
+<% end %>
+
+<% if @film.reviews.empty? %>
+  <h3>This film has no reviews yet</h3>
+<% end %>
+
+<%= link_to "Write a review", new_review_path(params: {film_id: @film.id}) %>
