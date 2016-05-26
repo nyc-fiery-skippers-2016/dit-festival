@@ -1,10 +1,10 @@
-<h1><%= @film.title %></h1>
+<div class="container">
+  <h1><%= @film.title %></h1>
 
 <div id="review-list">
 
-<p>Average Rating: <%= @film.score %></p>
+<p>Average Rating: <%= @film.avg_rating %></p>
 
-<% else %>
 <% if logged_in? && current_user.judge? %>
   <% if @film.ratings.where(user_id: current_user.id).length > 0  %>
     <p>Thank you for your rating</p>
@@ -27,7 +27,7 @@
       <%= f.hidden_field :user_id, :value => current_user.id %>
       <%= f.hidden_field :film_id, :value => @film.id %>
       <%= f.submit %>
-    <% end %> 
+    <% end %>
   <% end %>
 <% end %>
   <% @film.reviews.each do |review| %>
@@ -54,3 +54,5 @@
 <% end %>
 
 <div id="review-form-holder"></div>
+
+</div>

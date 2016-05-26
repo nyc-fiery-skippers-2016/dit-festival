@@ -6,26 +6,18 @@
 <% end %>
 <br><br>
 <h3>Your Reviews</h3>
-<% if @user.reviews.length < 1 %>
+<% if @user.reviews.length == 0 %>
   <h4>You haven't reviewed any films yet</h4>
 <% else %>
 <table>
   <thead>
     <td>Film Title</td>
     <td>Review</td>
-    <td>Rating</td>
   </thead>
 <% @user.reviews.each do |review| %>
   <tr>
     <td><%= link_to review.film.title, film_path(review.film) %></td>
     <td><%= link_to review.body, film_path(review.film) %></td>
-    <td><% if review.film.ratings != nil %>
-      <% review.film.ratings.each do |rating| %>
-      <%= link_to rating.score.to_f / 2, film_path(review.film) %></td>
-      <% end %>
-      <% else %>
-      <td> </td>
-    <% end %>
   </tr>
 <% end %>
 </table>
@@ -35,7 +27,7 @@
 
 
 <h3>Your Ratings</h3>
-<% if @user.ratings.length < 1 %>
+<% if @user.ratings.length == 0 %>
   <h4>You haven't rated any films yet</h4>
 <% else %>
 <table>
