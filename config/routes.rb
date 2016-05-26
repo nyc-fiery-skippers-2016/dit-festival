@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
 
+    resources :pages, only: [:index]
     resources :films, only:[:index, :new, :show, :create]
     resources :ratings, only:[:create]
     resources :categories, only: [:index, :show]
     resources :users, except: [:index, :destroy]
     resources :reviews, except: [:index] do
-      resources :comments, except: [:index]
+    resources :comments, except: [:index]
     end
 
     get    'login'   => 'sessions#new'

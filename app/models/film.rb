@@ -7,17 +7,19 @@ class Film < ActiveRecord::Base
   has_many :reviews
 
   def avg_rating
-    self.ratings.sum(:score)/self.ratings.length
+    judge_ratings = self.ratings.reduce(0) { |sum, rating| sum += rating.user.judge ? rating.score : 0 }
+    non_judge_ratings = self.ratings.reduce(0) { |sum, rating| sum += !rating.user.judge ? rating.score : 0 }
+    if self.ratings.length > 0
+     judge_ratings + non_judge_ratings / self.ratings.length
+    else
+      0
+    end
   end
 
   def score
   	judge_ratings = self.ratings.reduce(0) { |sum, rating| sum += rating.user.judge ? rating.score : 0 }
   	non_judge_ratings = self.ratings.reduce(0) { |sum, rating| sum += !rating.user.judge ? rating.score : 0 }
-    if self.ratings.length > 0
-  	 judge_ratings + non_judge_ratings / self.ratings.length
-    else
-      0
-    end
+  	judge_ratings + non_judge_ratings
 	end
 
 end
