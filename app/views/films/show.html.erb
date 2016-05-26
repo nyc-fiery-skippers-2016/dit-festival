@@ -2,16 +2,16 @@
 
 <div id="review-list">
   <% @film.reviews.each do |review| %>
-  <h3>Review by: <%= review.user.username%><br><%= review.body %><br>
+    <%= render "/reviews/review_partial", review: review %>
   <% if logged_in? %>
     <%= link_to "Comment on this review", new_review_comment_path(review) %>
   <% end %><br>
     <div class="comment-list">
       <% review.comments.each do |comment| %>
-      Comment by: <%= comment.user.username%><br><%= comment.body %><br>
+      <h4>Comment by: <%= comment.user.username%><br><%= comment.body %></h4><br>
       <% end %>
     </div>
-      </h3>
+    
 
   <% end %>
 </div>
