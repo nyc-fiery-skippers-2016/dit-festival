@@ -19,7 +19,10 @@ class ReviewsController < ApplicationController
 
 	def create
 		@review = Review.new(review_params.merge(user: current_user))
-		if @review.save
+    @film = Film.find_by(id: @review.film_id)
+
+    
+		if logged_in? && @review.save
       		redirect_to @review
     	else
       		render 'new'
