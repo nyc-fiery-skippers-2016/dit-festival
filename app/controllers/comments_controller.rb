@@ -19,11 +19,9 @@ class CommentsController < ApplicationController
 
   def create
     @review = Review.find_by(id: params[:review_id])
-    @comment = Comment.new(comment_params)
-    current_user.comments << @comment
-    @review.comments << @comment
+    @comment = Comment.new(comment_params.merge(user: current_user, review: @review))
     if @comment.save
-      redirect_to review_comments_path(@review, @comment)
+      redirect_to @review
     else
       render 'new'
     end
