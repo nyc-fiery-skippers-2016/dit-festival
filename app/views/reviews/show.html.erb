@@ -1,5 +1,5 @@
 
-<p><%=@review.body %></p>
+<%= render 'review_partial' %>
 
 
 <%= link_to 'Edit', edit_review_path(@review, params: {film_id: @review.film_id}) %>

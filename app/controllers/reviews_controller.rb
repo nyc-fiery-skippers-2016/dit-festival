@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  layout proc { false if request.xhr? }
 	def index
 		@reviews = Review.all
 	end
@@ -11,7 +12,7 @@ class ReviewsController < ApplicationController
 		@review = Review.new
     @film = Film.find_by(id: params[:film_id])
     if request.xhr?
-      render "/reviews/_form", layout: false
+      render "/reviews/_form"
     end
 	end
 
@@ -24,12 +25,15 @@ class ReviewsController < ApplicationController
 		@review = Review.new(review_params.merge(user: current_user))
     @film = Film.find_by(id: @review.film_id)
 
-    
 		if logged_in? && @review.save
+        if request.xhr?
+          render partial: "/reviews/review_partial", locals: {review: @review}
+        else
       		redirect_to @review
+        end
     	else
-      		render 'new'
-      	end
+      	render 'new'
+    end
 	end
 
 	def update
