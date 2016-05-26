@@ -1,16 +1,24 @@
 <div class="container">
+
+  <h1 class="uppercase">Login <span class="accent-word">here</span></h1>
+
+<div class="form-box">
 <%= form_for :sessions, url: {action: "create"} do |f| %>
 
-  <p>
-    <%= f.label :username %>
+  <h4><%= f.label :username %></h4>
     <%= f.text_field :username %>
-  </p>
-  <p>
-    <%= f.label :password %>
+
+  <h4><%= f.label :password %></h4>
     <%= f.password_field :password %>
-  </p>
-  <p>
-    <%= f.submit "Login" %>
-  </p>
+
+  <% if @errors %>
+      <h5 class="red"><%= @errors.first %></h5>
+  <% end %>
+
+</div>
+
+    <%= f.submit "Login", :class => "button" %>
+
 <% end %>
+
 </div>

@@ -13,15 +13,15 @@
     <%= f.password_field :password %>
 
 <% if @user.errors.any? %>
-
       <% @user.errors.full_messages.each do |msg| %>
         <h5 class="red"><%= msg %></h5>
       <% end %>
-    </ul>
 <% end %>
 
-  </div>
+</div>
+
   <%= f.submit "Register", :class => "button" %>
+
 <% end %>
 
 

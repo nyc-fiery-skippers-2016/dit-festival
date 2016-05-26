@@ -1,14 +1,27 @@
-<%= form_for @user do |f| %>
+<div class="container">
 
-  <p>
-    <%= f.label :username %>
+  <h1 class="uppercase">Edit Your <span class="accent-word">Profile</span></h1>
+
+  <div class="form-box">
+
+  <%= form_for @user do |f| %>
+
+  <h4><%= f.label :username %> </h4>
     <%= f.text_field :username %>
-  </p>
-  <p>
-    <%= f.label :password %>
+
+  <h4><%= f.label :password %></h4>
     <%= f.password_field :password %>
-  </p>
-  <p>
-    <%= f.submit "Register" %>
-  </p>
+
+  <% if @user.errors.any? %>
+      <% @user.errors.full_messages.each do |msg| %>
+        <h5 class="red"><%= msg %></h5>
+      <% end %>
+  <% end %>
+
+  </div>
+
+    <%= f.submit "Edit", :class => "button" %>
 <% end %>
+
+
+</div>
