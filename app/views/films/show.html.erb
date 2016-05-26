@@ -2,14 +2,13 @@
 
 <div id="review-list">
 
+<p>Average Score: <%= @film.score %></p>
+
 <% else %>
 <% if logged_in? && current_user.judge? %>
   <% if @film.ratings.where(user_id: current_user.id).length > 0  %>
-
     <p>Thank you for your rating</p>
-
   <% else %>
-
     <p>Rating</p>
     <%= form_for @rating do |f| %>
       <%= f.select(:score, Rating::JUDGE_SCORE) %>
@@ -17,17 +16,11 @@
       <%= f.hidden_field :film_id, :value => @film.id %>
       <%= f.submit %>
     <% end %>
-
   <% end %>
-
 <% elsif logged_in? && current_user.judge != true %>
-
   <% if @film.ratings.where(user_id: current_user.id).length > 0 %>
-
       <p>Thank you for your rating</p>
-
   <% else %>
-
     <p>Rating</p>
     <%= form_for @rating do |f| %>
       <%= f.select(:score, Rating::USER_SCORE) %>
@@ -35,11 +28,8 @@
       <%= f.hidden_field :film_id, :value => @film.id %>
       <%= f.submit %>
     <% end %> 
-
   <% end %>
-
 <% end %>
-
   <% @film.reviews.each do |review| %>
     <%= render "/reviews/review_partial", review: review %>
   <% if logged_in? %>
@@ -50,8 +40,6 @@
       <h4>Comment by: <%= comment.user.username%><br><%= comment.body %></h4><br>
       <% end %>
     </div>
-    
-
   <% end %>
 </div>
 
