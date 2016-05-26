@@ -2,7 +2,7 @@
 
 <div id="review-list">
 
-<p>Average Score: <%= @film.score %></p>
+<p>Average Rating: <%= @film.score %></p>
 
 <% else %>
 <% if logged_in? && current_user.judge? %>
