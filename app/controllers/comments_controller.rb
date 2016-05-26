@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
   def create
     @review = Review.find_by(id: params[:review_id])
     @comment = Comment.new(comment_params.merge(user: current_user, review: @review))
-    if @comment.save
+    if logged_in? && @comment.save
       redirect_to @review
     else
       render 'new'
