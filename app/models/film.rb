@@ -5,4 +5,9 @@ class Film < ActiveRecord::Base
   belongs_to :user
   has_many :ratings
   has_many :reviews
+
+   def avg_rating
+    self.ratings.sum(:score)/self.ratings.length
+  end
+
 end
