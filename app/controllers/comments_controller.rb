@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  layout proc { false if request.xhr? }
   def show
     @comment = Comment.find_by(id: params[:comment_id])
   end
@@ -6,6 +7,9 @@ class CommentsController < ApplicationController
   def new
     @review = Review.find_by(id: params[:review_id])
     @comment = Comment.new
+    if request.xhr?
+      render "/comments/new", locals: {review: @review, comment: @comment}
+    end
   end
 
   def edit
@@ -21,7 +25,11 @@ class CommentsController < ApplicationController
     @review = Review.find_by(id: params[:review_id])
     @comment = Comment.new(comment_params.merge(user: current_user, review: @review))
     if logged_in? && @comment.save
-      redirect_to @review
+      if request.xhr?
+        render partial: "comment_partial", locals: {comment: @comments}
+      else
+        redirect_to @review
+      end
     else
       render 'new'
     end
