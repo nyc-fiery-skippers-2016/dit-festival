@@ -2,7 +2,9 @@
 
 <% @film.reviews.each do |review| %>
 <h3>Review by: <%= review.user.username%><br><%= review.body %><br>
-<%= link_to "Comment on this review", new_review_comment_path(review) %><br>
+<% if logged_in? %>
+  <%= link_to "Comment on this review", new_review_comment_path(review) %>
+<% end %><br>
 <% review.comments.each do |comment| %>
 Comment by: <%= comment.user.username%><br><%= comment.body %><br>
 <% end %>
@@ -14,4 +16,6 @@ Comment by: <%= comment.user.username%><br><%= comment.body %><br>
   <h3>This film has no reviews yet</h3>
 <% end %>
 
-<%= link_to "Write a review", new_review_path(params: {film_id: @film.id}) %>
+<% if logged_in? %>
+  <%= link_to "Write a review", new_review_path(params: {film_id: @film.id}) %>
+<% end %>
