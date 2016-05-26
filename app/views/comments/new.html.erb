@@ -1,4 +1,4 @@
-<%= form_for @comment, :html =>{:class => "form"} do |f| %>
+<%= form_for @comment, url: review_comments_path, :html =>{:class => "form"} do |f| %>
 
 <% if @comment.errors.any? %>
 <h2><%= pluralize(@comment.errors.count,"error") %> prevented this comment from saving</h2>
