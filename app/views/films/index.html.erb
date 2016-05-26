@@ -1,7 +1,12 @@
-<h1>Films Up For Awards</h1>
+<div class="container">
+  <h1 class="uppercase">Films Up For Awards</h1>
 
+<h5>
+<div class="film-container">
 <% @films.each do |film| %>
-  <ul>
-    <li><%= link_to film.title, film_path(film) %></li>
-  </ul>
+  <section><%= link_to film.title, film_path(film) %></section>
 <% end %>
+</div>
+</h5>
+
+</div>

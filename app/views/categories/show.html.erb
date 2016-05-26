@@ -1,11 +1,16 @@
+<div class="container">
 
-<h1>Films in this Category</h1>
-<ul>
+  <h1 class="uppercase">Films in this Category</h1>
+
+<h5>
+<div class="film-list">
 <% @category_films.each do |film| %>
-  <li><%= link_to film.title, film_path(film) %></li>
+  <section><%= link_to film.title, film_path(film) %></section>
 <% end %>
+</div>
+</h5>
+
+<section class="back-button"><%= link_to 'Back', categories_path %></section>
 
 
-
-<%= link_to 'Back', categories_path %>
-</ul>
+</div>

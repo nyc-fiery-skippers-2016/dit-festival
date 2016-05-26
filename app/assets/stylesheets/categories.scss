@@ -1,3 +1,72 @@
 // Place all the styles related to the categories controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.category-container {
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  column-count: 3;
+  display: block;
+  width: 50em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3em;
+}
+
+.category-container a {
+  text-transform: uppercase;
+  color: black;
+  text-decoration: none;
+  font-weight: bolder;
+}
+
+.category-container section {
+  border: 5px solid black;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  margin-bottom: 4em;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.category-container section:hover {
+  background-color: black;
+  color: white;
+}
+
+.category-container section:hover a {
+  color: white;
+  width: 100%;
+}
+
+.film-list {
+  display: block;
+  width: 32em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3em;
+}
+
+.film-list a {
+  text-transform: uppercase;
+  color: black;
+  text-decoration: none;
+  font-weight: bolder;
+}
+
+.film-list section {
+  border: 5px solid black;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  margin-bottom: 2em;
+}
+
+.film-list section:hover {
+  background-color: black;
+  color: white;
+}
+
+.film-list section:hover a {
+  color: white;
+  width: 100%;
+}
