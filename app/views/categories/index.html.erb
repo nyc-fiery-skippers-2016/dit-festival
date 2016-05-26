@@ -1,6 +1,13 @@
-<h1>Categories</h1>
-<ol>
+<div class="container">
+
+  <h1 class="uppercase">Categories</h1>
+
+  <h5>
+  <div class="category-container">
   <% @categories.each do |category| %>
-    <li> <%= link_to category.name, category_path(category) %></li>
+    <section><%= link_to category.name, category_path(category) %></section>
   <% end %>
-</ol>
+  </div>
+  </h5>
+
+</div>
