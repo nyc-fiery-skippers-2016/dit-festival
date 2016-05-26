@@ -31,13 +31,14 @@
   <% end %>
 <% end %>
   <% @film.reviews.each do |review| %>
-    <%= render "/reviews/review_partial", review: review %>
+
   <% if logged_in? %>
-    <%= link_to "Comment on this review", new_review_comment_path(review) %>
+    <%= link_to "Comment on this review", new_review_comment_path(review), class:"write-comment" %>
+    <div class="comment-form-holder"></div>
   <% end %><br>
     <div class="comment-list">
       <% review.comments.each do |comment| %>
-      <h4>Comment by: <%= comment.user.username%><br><%= comment.body %></h4><br>
+      <%= render "/comments/comment_partial", comment: comment, review: review %>
       <% end %>
     </div>
   <% end %>
