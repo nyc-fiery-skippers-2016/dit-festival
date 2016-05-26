@@ -13,7 +13,11 @@ class Film < ActiveRecord::Base
   def score
   	judge_ratings = self.ratings.reduce(0) { |sum, rating| sum += rating.user.judge ? rating.score : 0 }
   	non_judge_ratings = self.ratings.reduce(0) { |sum, rating| sum += !rating.user.judge ? rating.score : 0 }
-  	judge_ratings + non_judge_ratings / self.rating.length
+    if self.ratings.length > 0
+  	 judge_ratings + non_judge_ratings / self.ratings.length
+    else
+      0
+    end
 	end
 
 end
