@@ -1,29 +1,30 @@
 <div class="container">
-<p>Drama</p>
-<%= @category1.last.title %>
-</div>
 
-<div class="container">
-<p>Comedy</p>
-<%= @category2.last.title %>
-</div>
+<h1 class="uppercase">Festival <span class="accent-word">Winners</span> </h1>
 
-<div class="container">
-<p>Triller/Horror</p>
-<%= @category3.last.title %>
-</div>
 
-<div class="container">
-<p>Musical</p>
-<%= @category4.last.title %>
-</div>
+  <div class="winner-container">
 
-<div class="container">
-<p>Action/Adventure</p>
-<%= @category5.last.title %>
-</div>
+  <section><h2 class="uppercase">Drama</h2>
+  <h4 class="accent-word"><%= link_to @category1.last.title, film_path(@category1.last) %></h4></section>
 
-<div class="container">
-<p>Documentary</p>
-<%= @category6.last.title %>
+  <section><h2 class="uppercase">Comedy</h2>
+  <h4 class="accent-word"><%= link_to @category2.last.title, film_path(@category2.last) %></h4></section>
+
+
+  <section><h2 class="uppercase">Triller/Horror</h2>
+  <h4 class="accent-word"><%= link_to @category3.last.title, film_path(@category3.last) %></h4></section>
+
+  <section><h2 class="uppercase">Musical</h2>
+  <h4 class="accent-word"><%= link_to @category4.last.title, film_path(@category4.last) %></h4></section>
+
+
+  <section><h2 class="uppercase">Action/Adventure</h2>
+  <h4 class="accent-word"><%= link_to @category5.last.title, film_path(@category5.last) %></h4></section>
+
+
+  <section><h2 class="uppercase">Documentary</h2>
+  <h4 class="accent-word"><%= link_to @category6.last.title, film_path(@category6.last) %></h4></section>
+  </div>
+
 </div>

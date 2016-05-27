@@ -3,59 +3,84 @@
 
 <div id="review-list">
 
-<p>Average Rating: <%= @film.average_rating %></p>
+<h4 class="uppercase">Average Rating: <%= @film.average_rating %></h4>
 
 <% if logged_in? && current_user.judge? %>
   <% if @film.ratings.where(user_id: current_user.id).length > 0  %>
     <p>Thank you for your rating</p>
   <% else %>
-    <p>Rating</p>
     <%= form_for @rating do |f| %>
-      <%= f.select(:score, Rating::JUDGE_SCORE) %>
+      <h5 class="uppercase">Rating: <%= f.select(:score, Rating::JUDGE_SCORE) %>
       <%= f.hidden_field :user_id, :value => current_user.id %>
-      <%= f.hidden_field :film_id, :value => @film.id %><br>
-      <%= f.submit "Rate", :class => "black-button" %>
+      <%= f.hidden_field :film_id, :value => @film.id %>
+      <%= f.submit "Rate", :class => "black-button rate" %></h5>
     <% end %>
   <% end %>
 <% elsif logged_in? && current_user.judge != true %>
   <% if @film.ratings.where(user_id: current_user.id).length > 0 %>
       <p>Thank you for your rating</p>
   <% else %>
-    <p>Rating</p>
+
     <%= form_for @rating do |f| %>
-      <%= f.select(:score, Rating::USER_SCORE) %>
+     <h5 class="uppercase">Rating: <%= f.select(:score, Rating::USER_SCORE) %>
       <%= f.hidden_field :user_id, :value => current_user.id %>
-      <%= f.hidden_field :film_id, :value => @film.id %><br><br>
-      <%= f.submit "Rate", :class => "black-button" %>
+      <%= f.hidden_field :film_id, :value => @film.id %>
+      <%= f.submit "Rate This Film", :class => "black-button rate" %></h5>
     <% end %>
   <% end %>
 <% end %>
 
-<h3>Judge Reviews</h3>
+<% if logged_in? %>
+  <%= link_to "Write a review", new_review_path(params: {film_id: @film.id}), class:"write-review black-button" %>
+<% end %>
+
+<div id="review-form-holder"></div>
+
+<h2 class="title">Judge Reviews</h2>
+  <% if @film.judge_review.empty? %>
+  <h3>No judges have reviewed this film</h3>
+  <% end %>
   <% @film.judge_review.each do |review| %>
-    <h4>Review by: <%= review.user.username%><br><%= review.body %><br></h4>
+    <div class="review-container">
+    <h5 class="tight-bottom-margin">Reviewer: <%= review.user.username%></h5>
+    <h3 class="uppercase"><%= review.body %></h3>
+    </div>
      <% if logged_in? %>
-    <%= link_to "Comment on this review", new_review_comment_path(review), class:"black-button" %>
-    <% end %><br>
+    <% end %>
     <div class="comment-list">
       <% review.comments.each do |comment| %>
-      <h5>Comment by: <%= comment.user.username%><br><%= comment.body %></h5><br>
+      <h5 class="tight-bottom-margin">Comment by: <%= comment.user.username%></h5>
+      <h4 class="comment"><%= comment.body %></h4>
       <% end %>
     </div>
+    <br>
+    <%= link_to "Comment on this review", new_review_comment_path(review), class:"black-button" %>
+    <div class="thin-underline"></div>
+  </div>
   <% end %>
 
 
- <h3>User Reviews</h3>
+ <h2 class="title">User Reviews</h2>
+
+    <% if @film.user_review.empty? %>
+    <h3>No users have reviewed this film</h3>
+    <% end %>
   <% @film.user_review.each do |review| %>
-    <h4>Review by: <%= review.user.username%><br><%= review.body %><br></h4>
-     <% if logged_in? %>
-    <%= link_to "Comment on this review", new_review_comment_path(review), class:"black-button" %>
-    <% end %><br>
-    <div class="comment-list">
-      <% review.comments.each do |comment| %>
-      <h5>Comment by: <%= comment.user.username%><br><%= comment.body %></h5><br>
-      <% end %>
+    <div class="review-container">
+    <h5 class="tight-bottom-margin">Reviewer: <%= review.user.username%></h5>
+    <h3 class="uppercase"><%= review.body %></h3>
     </div>
+        <% if logged_in? %>
+      <% end %>
+        <div class="comment-list">
+          <% review.comments.each do |comment| %>
+          <h5 class="tight-bottom-margin">Comment by: <%= comment.user.username%></h5>
+          <h4 class="comment"><%= comment.body %></h4>
+          <% end %>
+        </div>
+    <br>
+    <%= link_to "Comment on this review", new_review_comment_path(review), class:"black-button" %>
+    <div class="thin-underline"></div>
   <% end %>
 
 </div>
@@ -64,11 +89,6 @@
   <h3>This film has no reviews yet</h3>
 <% end %>
 
-<% if logged_in? %>
-<br><br><br>
-  <%= link_to "Write a review", new_review_path(params: {film_id: @film.id}), class:"write-review black-button" %>
-<% end %>
 
-<div id="review-form-holder"></div>
 
 </div>
