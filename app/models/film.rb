@@ -17,6 +17,8 @@ class Film < ActiveRecord::Base
 
     if self.ratings.length > 1
      (judge_total + non_judge_total).round(1)
+    elsif self.ratings.length == 0
+      0
     else
       self.ratings.first.score
     end
@@ -27,5 +29,13 @@ class Film < ActiveRecord::Base
   	non_judge_ratings = self.ratings.reduce(0) { |sum, rating| sum += !rating.user.judge ? rating.score : 0 }
   	judge_ratings + non_judge_ratings
 	end
+
+  def judge_review
+    self.reviews.find_all { |review| review.user.judge == true }
+  end
+
+  def user_review
+    self.reviews.find_all { |review| review.user.judge == false }
+  end
 
 end

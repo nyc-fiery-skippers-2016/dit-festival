@@ -1,5 +1,5 @@
 <div class="container">
-  <h1><%= @film.title %></h1>
+  <h1 class="accent-word"><%= @film.title %></h1>
 
 <div id="review-list">
 
@@ -13,8 +13,8 @@
     <%= form_for @rating do |f| %>
       <%= f.select(:score, Rating::JUDGE_SCORE) %>
       <%= f.hidden_field :user_id, :value => current_user.id %>
-      <%= f.hidden_field :film_id, :value => @film.id %>
-      <%= f.submit %>
+      <%= f.hidden_field :film_id, :value => @film.id %><br>
+      <%= f.submit "Rate", :class => "black-button" %>
     <% end %>
   <% end %>
 <% elsif logged_in? && current_user.judge != true %>
@@ -25,23 +25,39 @@
     <%= form_for @rating do |f| %>
       <%= f.select(:score, Rating::USER_SCORE) %>
       <%= f.hidden_field :user_id, :value => current_user.id %>
-      <%= f.hidden_field :film_id, :value => @film.id %>
-      <%= f.submit %>
+      <%= f.hidden_field :film_id, :value => @film.id %><br><br>
+      <%= f.submit "Rate", :class => "black-button" %>
     <% end %>
   <% end %>
 <% end %>
-  <% @film.reviews.each do |review| %>
 
-  <% if logged_in? %>
-    <%= link_to "Comment on this review", new_review_comment_path(review), class:"write-comment" %>
-    <div class="comment-form-holder"></div>
-  <% end %><br>
+<h3>Judge Reviews</h3>
+  <% @film.judge_review.each do |review| %>
+    <h4>Review by: <%= review.user.username%><br><%= review.body %><br></h4>
+     <% if logged_in? %>
+    <%= link_to "Comment on this review", new_review_comment_path(review), class:"black-button" %>
+    <% end %><br>
     <div class="comment-list">
       <% review.comments.each do |comment| %>
-      <%= render "/comments/comment_partial", comment: comment, review: review %>
+      <h5>Comment by: <%= comment.user.username%><br><%= comment.body %></h5><br>
       <% end %>
     </div>
   <% end %>
+
+
+ <h3>User Reviews</h3>
+  <% @film.user_review.each do |review| %>
+    <h4>Review by: <%= review.user.username%><br><%= review.body %><br></h4>
+     <% if logged_in? %>
+    <%= link_to "Comment on this review", new_review_comment_path(review), class:"black-button" %>
+    <% end %><br>
+    <div class="comment-list">
+      <% review.comments.each do |comment| %>
+      <h5>Comment by: <%= comment.user.username%><br><%= comment.body %></h5><br>
+      <% end %>
+    </div>
+  <% end %>
+
 </div>
 
 <% if @film.reviews.empty? %>
@@ -49,8 +65,8 @@
 <% end %>
 
 <% if logged_in? %>
-
-  <%= link_to "Write a review", new_review_path(params: {film_id: @film.id}), class:"write-review" %>
+<br><br><br>
+  <%= link_to "Write a review", new_review_path(params: {film_id: @film.id}), class:"write-review black-button" %>
 <% end %>
 
 <div id="review-form-holder"></div>
