@@ -39,3 +39,35 @@
   color: white;
   width: 100%;
 }
+
+.title {
+  text-transform: uppercase;
+  width: 20em;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 1em;
+  padding-top: 2em;
+  border-bottom: 5px solid black;
+}
+
+.thin-underline {
+  border-bottom: 2px solid black;
+  width: 15em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3em;
+}
+
+.review-container {
+  width: 25em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tight-bottom-margin {
+  margin-bottom: -1em;
+}
+
+.comment {
+  font-size: 90%;
+}

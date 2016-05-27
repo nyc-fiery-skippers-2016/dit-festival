@@ -121,3 +121,11 @@ body {
   font-size: 85%;
   text-transform: uppercase;
 }
+
+.black-button.rate {
+  margin-left: 2em;
+}
+
+.black-button.write-review {
+  margin-left: 2em;
+}
