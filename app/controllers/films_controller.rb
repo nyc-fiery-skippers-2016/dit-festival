@@ -1,6 +1,7 @@
 class FilmsController < ApplicationController
   def index
-    @films = Film.all
+    # binding.pry
+    @films = Film.all.sort_by { |film| film.average_rating}.reverse
   end
 
   def show
