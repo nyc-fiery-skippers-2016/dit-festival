@@ -31,7 +31,7 @@
   <% end %>
 <% end %>
   <% @film.reviews.each do |review| %>
-    <%= render "/reviews/review_partial", review: review %>
+
   <% if logged_in? %>
     <%= link_to "Comment on this review", new_review_comment_path(review), class:"write-comment" %>
     <div class="comment-form-holder"></div>
