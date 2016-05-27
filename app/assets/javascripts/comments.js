@@ -3,13 +3,13 @@ $(document).ready(function(){
     event.preventDefault();
 
     var $target = $(event.target);
-
+    var $targetAppend = $target.parent();
     requestOptions = {
       url: $target.attr('href')
     }
 
     $.ajax(requestOptions).done(function(response){
-      $('.comment-form-holder').append(response);
+      $targetAppend.append(response);
       $('.write-comment').hide();
     });
   });
@@ -18,7 +18,7 @@ $(document).ready(function(){
     event.preventDefault();
 
     var $target = $(event.target)
-
+    var $targetAppend = $target.parent();
     requestOptions = {
       url: $target.attr('action'),
       method: $target.attr('method'),
@@ -26,7 +26,7 @@ $(document).ready(function(){
     }
 
     $.ajax(requestOptions).done(function(response){
-      $('.comment-list').append(response);
+      $('#comment-list').append(response);
       $('.comment-form-holder').empty();
       $('.write-comment').show();
     });

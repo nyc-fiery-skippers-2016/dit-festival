@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params.merge(user: current_user, review: @review))
     if logged_in? && @comment.save
       if request.xhr?
-        render partial: "comment_partial", locals: {comment: @comments}
+        render partial: "comment_partial", locals: {comment: @comment}
       else
         redirect_to @review
       end
